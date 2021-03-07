@@ -1,16 +1,20 @@
 #pragma once
 
+#include <iostream>
+#include <vector>
+
 class CardReader
 {
 public:
     CardReader() = default;
     ~CardReader() = default;
 
-    void readCardNumber();
-    long long getCardNumber();
+    bool readCardNumber(std::istream& stream);
+    std::string getCardNumber();
 
 protected:
-    long long cardNumber;
+    std::string cardNumber;
+
 };
 
 

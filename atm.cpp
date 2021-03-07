@@ -1,16 +1,9 @@
 #include <iostream>
-#include "ATMCashBin.hpp"
-#include "BankDatabase.hpp"
-#include "BankInterface.hpp"
-#include "CardReader.hpp"
-#include "PINReader.hpp"
+#include "ATM.hpp"
 
 int main()
 {
-    ATMCashBin cashBin(0);
-    BankInterface bankInterface;
-    CardReader cardReader;
-    PINReader pinReader;
-    std::cout << "Please insert your card." << std::endl;
+    ATM atm;
+    atm.run();
     return 0;
 }

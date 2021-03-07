@@ -1,15 +1,17 @@
 #pragma once
 
+#include <iostream>
+
 class PINReader
 {
 public:
     PINReader() = default;
     ~PINReader() = default;
     
-    void readPinNumber();
-    int getPinNumber(); 
+    bool readPinNumber(std::istream& stream);
+    std::string getPinNumber(); 
 
 protected:
-    int pinNumber;
+    std::string pinNumber;
 };
 

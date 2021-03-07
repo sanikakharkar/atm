@@ -8,5 +8,9 @@ project(atm)
 include_directories(include)
  
 file(GLOB SOURCES src/*.cpp)
+
+file(GLOB TEST test/*.cpp)
  
 add_executable(atm atm.cpp ${SOURCES})
+
+add_executable(atm_test test/atm_test.cpp ${SOURCES} ${TEST})
