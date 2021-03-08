@@ -19,13 +19,24 @@ Based on your work, another engineer should be able to implement the user interf
 You don't need to implement any REST API, RPC, network communication etc, but just functions/classes/methods, etc.
 You can simplify some complex real world problems if you think it's not worth illustrating in the project. 
 
+ASSUMPTIONS
+----------------------------------------------------------------------------------------------------------------------
+- Card reader and PIN reader inputs taken from std::cin
+- Only one account associated with card
+- Account data only includes account number, PIN Number and balance
+- Only debit cards can be used i.e. withdraw amount less than account balance (will prompt the user to enter amount less than balance)
 
 INSTRUCTIONS
 ----------------------------------------------------------------------------------------------------------------------
+
+WINDOWS (with MinGW)
 
 To build:
 
 - mkdir build
 - cd build
-- cmake ..
-- make
+- cmake .. -G "MinGW Makefiles"
+- mingw32-make
+
+To run tests:
+- .\atm_test.exe
