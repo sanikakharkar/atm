@@ -16,6 +16,14 @@ public:
     void run(std::istream& inStream, std::ostream& outStream);
 
 protected:
+    bool acceptCard(std::istream& inStream, std::ostream& outStream);
+    bool acceptPIN(std::istream& inStream, std::ostream& outStream);
+    void performTransactions(std::istream& inStream, std::ostream& outStream);
+    void performCheckBalance(std::istream& inStream, std::ostream& outStream);
+    void performWithdraw(std::istream& inStream, std::ostream& outStream);
+    void performDeposit(std::istream& inStream, std::ostream& outStream);
+    void performEndSession(std::istream& inStream, std::ostream& outStream);
+
     ATMCashBin cashBin;
     BankInterface bankInterface;
     CardReader cardReader;
