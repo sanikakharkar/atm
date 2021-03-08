@@ -29,6 +29,11 @@ ASSUMPTIONS
 INSTRUCTIONS
 ----------------------------------------------------------------------------------------------------------------------
 
+To clone repository:
+
+git clone https://github.com/sanikakharkar/atm.git
+
+
 WINDOWS (with MinGW)
 
 To build:
@@ -40,3 +45,19 @@ To build:
 
 To run tests:
 - .\atm_test.exe
+
+
+UBUNTU 
+
+To build:
+
+- mkdir build
+- cd build
+- cmake .. 
+- make
+
+To run tests:
+- ./atm_test
+
+
+Note: Current test suite is rudimentary and does not give a complete code coverage. Would use Google Tests for a bigger project.
