@@ -1,13 +1,17 @@
 #include "BankInterface.hpp"
 
+BankInterface::BankInterface(BankDatabase<std::string, AccountData>& database)
+:database{database}
+{}
+
 bool BankInterface::isValidCardNumber(std::string cardNumber)
 {
-    return isValidKey(cardNumber);
+    return database.isValidKey(cardNumber);
 }
 
 bool BankInterface::isCorrectPin(std::string cardNumber, std::string pinNumber)
 {
-    AccountData data = getAccountData(cardNumber);
+    AccountData data = database.getAccountData(cardNumber);
     if (data.pinNumber != pinNumber)
     {
         return false;
@@ -18,11 +22,11 @@ bool BankInterface::isCorrectPin(std::string cardNumber, std::string pinNumber)
 
 long long BankInterface::checkBalance()
 {
-    return getAccountData(cardNumber).balance;
+    return database.getAccountData(cardNumber).balance;
 }
 
 long long BankInterface::updateBalance(long long difference)
 {
-    getAccountData(cardNumber).balance += difference;
-    return getAccountData(cardNumber).balance;
+    database.getAccountData(cardNumber).balance += difference;
+    return database.getAccountData(cardNumber).balance;
 }

@@ -3,7 +3,7 @@
 bool CardReader::readCardNumber(std::istream& stream)
 {
     stream >> cardNumber;
-    if (cardNumber.size() != 16)
+    if (cardNumber.size() != 12)
     {
         return false;
     }

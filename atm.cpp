@@ -3,7 +3,8 @@
 
 int main()
 {
-    ATM atm;
-    atm.run();
+    BankDatabase<std::string, AccountData> database;
+    ATM atm(database);
+    atm.run(std::cin, std::cout);
     return 0;
 }

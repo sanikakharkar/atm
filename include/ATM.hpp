@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include "ATMCashBin.hpp"
 #include "BankDatabase.hpp"
@@ -8,10 +10,10 @@
 class ATM
 {
 public:
-    ATM();
+    ATM(BankDatabase<std::string, AccountData>& database);
     ~ATM() = default;
 
-    void run();
+    void run(std::istream& inStream, std::ostream& outStream);
 
 protected:
     ATMCashBin cashBin;

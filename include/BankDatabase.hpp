@@ -1,11 +1,13 @@
 #pragma once
 
 #include <map>
+#include <iostream>
 
 template <class Key, class Data>
 class BankDatabase
 {
 public:
+    friend class BankInterface;
     BankDatabase() = default;
     ~BankDatabase() = default;
 

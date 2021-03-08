@@ -1,18 +1,13 @@
 #pragma once
 
+#include <iostream>
+#include "AccountData.hpp"
 #include "BankDatabase.hpp"
 
-struct AccountData
-{
-    std::string cardNumber;
-    std::string pinNumber;
-    long long balance;
-};
-
-class BankInterface : public BankDatabase<std::string, AccountData>
+class BankInterface
 {
 public:
-    BankInterface() = default;
+    BankInterface(BankDatabase<std::string, AccountData>& database);
     ~BankInterface() = default;
 
     bool isValidCardNumber(std::string cardNumber);
@@ -25,5 +20,5 @@ public:
    
 protected:
     std::string cardNumber;
-
+    BankDatabase<std::string, AccountData>& database;
 };
