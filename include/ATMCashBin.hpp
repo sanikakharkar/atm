@@ -3,14 +3,12 @@
 class ATMCashBin
 {
 public:
-    ATMCashBin(unsigned long long initialBalance)
-    :balance{initialBalance}
-    {};
+    ATMCashBin(long long initialBalance);
 
-    bool withdraw(unsigned long long amount);
-    void deposit(unsigned long long amount);
-
+    bool withdraw(long long amount);
+    void deposit(long long amount);
+    
 protected:
-    unsigned long long balance;
+    long long balance;
 
 };

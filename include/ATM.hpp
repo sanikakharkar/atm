@@ -10,7 +10,7 @@
 class ATM
 {
 public:
-    ATM(BankDatabase<std::string, AccountData>& database);
+    ATM(BankDatabase<std::string, AccountData>& database, long long initialbalance);
     ~ATM() = default;
 
     void run(std::istream& inStream, std::ostream& outStream);

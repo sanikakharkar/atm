@@ -1,7 +1,7 @@
 #include "ATM.hpp"
 
-ATM::ATM(BankDatabase<std::string, AccountData>& database)
-:cashBin(ATMCashBin(0)),
+ATM::ATM(BankDatabase<std::string, AccountData>& database, long long initialbalance)
+:cashBin(ATMCashBin(initialbalance)),
 bankInterface(BankInterface(database))
 {}
 
@@ -12,7 +12,7 @@ void ATM::run(std::istream& inStream, std::ostream& outStream)
     bool endSession = false;
 
     outStream << "Welcome!" << std::endl;
-    outStream << "Please enter your card number." << std::endl;
+    outStream << "Please enter your card number." << std::endl << std::endl;
 
     while(!endSession)
     {
@@ -32,12 +32,12 @@ void ATM::run(std::istream& inStream, std::ostream& outStream)
         }
         else
         {
-            outStream << "Your have selected account " << cardReader.getCardNumber() << std::endl;
+            outStream << "You have selected account " << cardReader.getCardNumber() <<  std::endl << std::endl;
             break;
         }
     }
 
-    outStream << "Please enter your PIN number." << std::endl;
+    outStream << "Please enter your PIN number." << std::endl << std::endl;
     invalidAttempts = 0;
     while(!endSession)
     {
@@ -65,7 +65,7 @@ void ATM::run(std::istream& inStream, std::ostream& outStream)
     outStream << "1. Check balance" << std::endl;
     outStream << "2. Withdraw amount" << std::endl;
     outStream << "3. Deposit amount" << std::endl;
-    outStream << "4. End session" << std::endl;
+    outStream << "4. End session" << std::endl << std::endl;
 
     int option = 0;
     invalidAttempts = 0;
@@ -76,18 +76,49 @@ void ATM::run(std::istream& inStream, std::ostream& outStream)
         {
             case 1:
             {
+                outStream << "You have chosen option " << option << std::endl;
+                outStream << "Your current balance is: " << bankInterface.checkBalance() << "$" << std::endl << std::endl;
                 break;
             }
             case 2:
             {
+                outStream << "You have chosen option " << option << std::endl;
+                outStream << "Please enter the amount you'd like to withdraw." << std::endl;
+                long long withdraw;
+                inStream >> withdraw;
+                if (cashBin.withdraw(withdraw))
+                {
+                    if (withdraw > bankInterface.checkBalance())
+                    {
+                        outStream << "Your current balance is: " << bankInterface.checkBalance() << "$. Please enter a lesser amount." << std::endl;
+                    }
+                    else
+                    {
+                        outStream << "You have withdrawn " << withdraw << "$. Please collect your amount from the tray." << std::endl;
+                        outStream << "Your new balance is: " << bankInterface.updateBalance(-withdraw) << "$" << std::endl;
+                    }
+                }
+                else
+                {
+                    outStream << "Amount exceeds the maximum amount in the ATM. Please enter a lesser amount." << std::endl;
+                }
+                outStream << std::endl;
                 break;
             }
             case 3:
             {
+                outStream << "You have chosen option " << option << std::endl;
+                outStream << "Please enter the amount you'd like to deposit and place it in the tray." << std::endl;
+                long long deposit;
+                inStream >> deposit;
+                cashBin.deposit(deposit);
+                outStream << "You have deposited " << deposit << "$." << std::endl;
+                outStream << "Your new balance is: " << bankInterface.updateBalance(deposit) << "$" << std::endl << std::endl;
                 break;
             }
             case 4:
             {
+                outStream << "You have chosen option " << option << std::endl;
                 endSession = true;
                 outStream << "Ending current session." << std::endl;
                 return;
